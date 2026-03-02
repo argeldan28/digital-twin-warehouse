@@ -62,4 +62,14 @@ public class SimulationService {
         // For MVP, just return the first/only active simulation
         return activeEngines.values().iterator().next().getWarehouse();
     }
+    public final SimpMessagingTemplate getMessagingTemplate() { return messagingTemplate; }
+    public void setMessagingTemplate(final SimpMessagingTemplate messagingTemplate) { this.messagingTemplate = messagingTemplate; }
+    public final PersistenceService getPersistenceService() { return persistenceService; }
+    public void setPersistenceService(final PersistenceService persistenceService) { this.persistenceService = persistenceService; }
+    public final PredictiveMaintenanceService getPredictiveMaintenanceService() { return predictiveMaintenanceService; }
+    public void setPredictiveMaintenanceService(final PredictiveMaintenanceService predictiveMaintenanceService) { this.predictiveMaintenanceService = predictiveMaintenanceService; }
+    public final EventLoggerService getEventLoggerService() { return eventLoggerService; }
+    public void setEventLoggerService(final EventLoggerService eventLoggerService) { this.eventLoggerService = eventLoggerService; }
+    public final OrderAssignmentService getOrderAssignmentService() { return orderAssignmentService; }
+    public void setOrderAssignmentService(final OrderAssignmentService orderAssignmentService) { this.orderAssignmentService = orderAssignmentService; }
 }

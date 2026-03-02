@@ -50,4 +50,12 @@ public class PersistenceService {
             robotRepository.save(entity);
         });
     }
+    public final WarehouseRepository getWarehouseRepository() { return warehouseRepository; }
+    public void setWarehouseRepository(final WarehouseRepository warehouseRepository) { this.warehouseRepository = warehouseRepository; }
+    public final RobotRepository getRobotRepository() { return robotRepository; }
+    public void setRobotRepository(final RobotRepository robotRepository) { this.robotRepository = robotRepository; }
+    public final GridNodeRepository getGridNodeRepository() { return gridNodeRepository; }
+    public void setGridNodeRepository(final GridNodeRepository gridNodeRepository) { this.gridNodeRepository = gridNodeRepository; }
+    public final PersistenceMapper getMapper() { return mapper; }
+    public void setMapper(final PersistenceMapper mapper) { this.mapper = mapper; }
 }

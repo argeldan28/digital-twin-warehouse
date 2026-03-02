@@ -1,4 +1,18 @@
+import os
+import re
 
+base_path = r"c:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin"
+
+# Let's fix PersistenceMapper.java
+pm_file = os.path.join(base_path, "infrastructure", "persistence", "PersistenceMapper.java")
+with open(pm_file, 'r', encoding='utf-8') as f:
+    pm_content = f.read()
+
+# Replace WarehouseEntity builder
+# The pattern is entity.method().method().build() etc. but it might be easier to just 
+# write a quick script that replaces the entire mapper methods manually since there are only 4 methods
+
+mapper_code = """
 package com.warehouse.digitaltwin.infrastructure.persistence;
 
 import com.warehouse.digitaltwin.domain.model.*;
@@ -76,3 +90,9 @@ public class PersistenceMapper {
         return entity;
     }
 }
+"""
+
+with open(pm_file, 'w', encoding='utf-8') as f:
+    f.write(mapper_code)
+
+print("Fixed PersistenceMapper.java")

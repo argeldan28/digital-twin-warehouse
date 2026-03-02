@@ -130,4 +130,12 @@ public class SimulationController {
                 .findFirst()
                 .orElse(currentWarehouse.getGrid().get(0));
     }
+    public final SimulationService getSimulationService() { return simulationService; }
+    public void setSimulationService(final SimulationService simulationService) { this.simulationService = simulationService; }
+    public final WarehouseFactory getWarehouseFactory() { return warehouseFactory; }
+    public void setWarehouseFactory(final WarehouseFactory warehouseFactory) { this.warehouseFactory = warehouseFactory; }
+    public final EventLogRepository getEventLogRepository() { return eventLogRepository; }
+    public void setEventLogRepository(final EventLogRepository eventLogRepository) { this.eventLogRepository = eventLogRepository; }
+    public Warehouse getCurrentWarehouse() { return currentWarehouse; }
+    public void setCurrentWarehouse(Warehouse currentWarehouse) { this.currentWarehouse = currentWarehouse; }
 }

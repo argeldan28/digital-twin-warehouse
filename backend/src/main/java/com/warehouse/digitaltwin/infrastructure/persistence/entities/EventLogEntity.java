@@ -1,18 +1,12 @@
 package com.warehouse.digitaltwin.infrastructure.persistence.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
 @Table(name = "event_logs")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class EventLogEntity {
 
     @Id
@@ -30,4 +24,14 @@ public class EventLogEntity {
 
     @Column(name = "timestamp", nullable = false)
     private LocalDateTime timestamp;
+    public UUID getId() { return id; }
+    public void setId(UUID id) { this.id = id; }
+    public UUID getWarehouseId() { return warehouseId; }
+    public void setWarehouseId(UUID warehouseId) { this.warehouseId = warehouseId; }
+    public String getEventType() { return eventType; }
+    public void setEventType(String eventType) { this.eventType = eventType; }
+    public String getPayload() { return payload; }
+    public void setPayload(String payload) { this.payload = payload; }
+    public LocalDateTime getTimestamp() { return timestamp; }
+    public void setTimestamp(LocalDateTime timestamp) { this.timestamp = timestamp; }
 }

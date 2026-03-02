@@ -3,6 +3,9 @@ package com.warehouse.digitaltwin.domain.model;
 import java.util.UUID;
 
 public class Robot {
+    private Task assignedTask;
+    private double speed;
+    private double distanceTraveled;
     private UUID id;
     private String name;
     private GridNode currentNode;
@@ -70,4 +73,11 @@ public class Robot {
     public void setCurrentOrderId(UUID currentOrderId) {
         this.currentOrderId = currentOrderId;
     }
-}
+
+    public Task getAssignedTask() { return assignedTask; }
+    public void setAssignedTask(Task assignedTask) { this.assignedTask = assignedTask; }
+    public double getSpeed() { return speed; }
+    public void setSpeed(double speed) { this.speed = speed; }
+    public double getDistanceTraveled() { return distanceTraveled; }
+    public void setDistanceTraveled(double distanceTraveled) { this.distanceTraveled = distanceTraveled; }
+    }

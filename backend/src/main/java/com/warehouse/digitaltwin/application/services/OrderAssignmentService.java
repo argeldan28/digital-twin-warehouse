@@ -13,7 +13,6 @@ import java.util.UUID;
 
 @Service
 
-
 public class OrderAssignmentService {
 
     private static final Logger log = LoggerFactory.getLogger(OrderAssignmentService.class);
@@ -33,27 +32,28 @@ public class OrderAssignmentService {
         }
 
         // For MVP, we pick the first item's location as the target
-        if (order.getItems().isEmpty()) return;
+        if (order.getItems().isEmpty())
+            return;
         GridNode target = order.getItems().get(0).getLocation();
 
         List<GridNode> path = pathfinder.findPath(warehouse, assignedRobot.getCurrentNode(), target);
-        
+
         if (path.isEmpty()) {
-            log.error("No path found for robot {} to target [{}, {}]", assignedRobot.getId(), target.getX(), target.getY());
+            log.error("No path found for robot {} to target [{}, {}]", assignedRobot.getId(), target.getX(),
+                    target.getY());
             return;
         }
 
-        Task task = Task.builder()
-                .id(UUID.randomUUID())
-                .order(order)
-                .path(path)
-                .pathIndex(0)
-                .build();
+        Task task = new Task();
+        task.setId(UUID.randomUUID());
+        task.setOrder(order);
+        task.setCurrentPath(path);
+        task.setPathIndex(0);
 
         assignedRobot.setAssignedTask(task);
         assignedRobot.setState(RobotState.MOVING);
         order.setState(OrderState.IN_PROGRESS);
-        
+
         log.info("Assigned order {} to robot {}. Path length: {}", order.getId(), assignedRobot.getId(), path.size());
     }
 }

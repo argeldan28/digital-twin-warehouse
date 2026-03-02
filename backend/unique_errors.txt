@@ -1,0 +1,12 @@
+C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\application\services\EventLoggerService.java - cannot find symbol
+C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\application\services\OrderAssignmentService.java - cannot find symbol
+C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\application\services\OrderGeneratorService.java - cannot find symbol
+C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\application\services\PredictiveMaintenanceService.java - cannot find symbol
+C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\application\services\SimulationService.java - constructor SimulationEngine in class SimulationEngine cannot be applied to given types;
+C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\domain\model\Task.java - cannot find symbol
+C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\domain\model\WarehouseFactory.java - cannot find symbol
+C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\domain\model\WarehouseFactory.java - no suitable constructor found for Robot(String,GridNode,double,RobotState,double,double,<null>)
+C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java - cannot find symbol
+C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceMapper.java - cannot find symbol
+C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceService.java - cannot find symbol
+C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceService.java - invalid method reference

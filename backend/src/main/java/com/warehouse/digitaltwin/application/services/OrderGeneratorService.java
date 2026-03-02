@@ -25,25 +25,26 @@ public class OrderGeneratorService {
                 .filter(node -> node.getType() == NodeType.SHELF)
                 .collect(Collectors.toList());
 
-        if (shelves.isEmpty()) return null;
+        if (shelves.isEmpty())
+            return null;
 
         int numItems = random.nextInt(3) + 1;
         List<OrderItem> items = new ArrayList<>();
         for (int i = 0; i < numItems; i++) {
             GridNode randomShelf = shelves.get(random.nextInt(shelves.size()));
-            items.add(OrderItem.builder()
-                    .id(UUID.randomUUID())
-                    .location(randomShelf)
-                    .build());
+            OrderItem orderItem = new OrderItem();
+            orderItem.setId(UUID.randomUUID());
+            orderItem.setLocation(randomShelf);
+            items.add(orderItem);
         }
 
-        return Order.builder()
-                .id(UUID.randomUUID())
-                .priority(random.nextInt(5))
-                .createdAt(LocalDateTime.now())
-                .slaTarget(LocalDateTime.now().plusMinutes(30))
-                .state(OrderState.PENDING)
-                .items(items)
-                .build();
+        Order newOrder = new Order();
+        newOrder.setId(UUID.randomUUID());
+        newOrder.setPriority(random.nextInt(5));
+        newOrder.setCreatedAt(LocalDateTime.now());
+        newOrder.setSlaTarget(LocalDateTime.now().plusMinutes(30));
+        newOrder.setState(OrderState.PENDING);
+        newOrder.setItems(items);
+        return newOrder;
     }
 }

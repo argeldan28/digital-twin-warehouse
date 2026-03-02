@@ -54,28 +54,51 @@ public class WarehouseFactory {
         List<Robot> robots = new ArrayList<>();
         GridNode startNode = grid.stream().filter(n -> n.getType() == NodeType.WALKABLE).findFirst()
                 .orElse(grid.get(0));
-        robots.add(new Robot("Android 1", startNode, 100.0, RobotState.IDLE, 1.0, 0.0, null));
-        robots.add(new Robot("Android 2", grid.get(10), 100.0, RobotState.IDLE, 1.0, 0.0, null));
-        robots.add(new Robot("Android 3", grid.get(20), 100.0, RobotState.IDLE, 1.0, 0.0, null));
+        Robot r1 = new Robot();
+        r1.setId(UUID.randomUUID());
+        r1.setName("Android 1");
+        r1.setCurrentNode(startNode);
+        r1.setBatteryLevel(100.0);
+        r1.setState(RobotState.IDLE);
+        r1.setSpeed(1.0);
+        r1.setDistanceTraveled(0.0);
+        robots.add(r1);
 
-        WarehouseKpis kpis = WarehouseKpis.builder()
-                .activeRobots(3)
-                .averageBatteryLevel(100.0)
-                .averageRobotUtilization(0)
-                .pendingOrders(0)
-                .totalOrdersCompleted(0)
-                .throughputPerHour(0)
-                .build();
+        Robot r2 = new Robot();
+        r2.setId(UUID.randomUUID());
+        r2.setName("Android 2");
+        r2.setCurrentNode(grid.get(10));
+        r2.setBatteryLevel(100.0);
+        r2.setState(RobotState.IDLE);
+        r2.setSpeed(1.0);
+        r2.setDistanceTraveled(0.0);
+        robots.add(r2);
 
-        return Warehouse.builder()
-                .id(UUID.randomUUID())
-                .width(width)
-                .height(height)
-                .grid(grid)
-                .robots(robots)
-                .activeOrders(new ArrayList<>())
-                .completedOrders(new ArrayList<>())
-                .kpis(kpis)
-                .build();
+        Robot r3 = new Robot();
+        r3.setId(UUID.randomUUID());
+        r3.setName("Android 3");
+        r3.setCurrentNode(grid.get(20));
+        r3.setBatteryLevel(100.0);
+        r3.setState(RobotState.IDLE);
+        r3.setSpeed(1.0);
+        r3.setDistanceTraveled(0.0);
+        robots.add(r3);
+
+        WarehouseKpis kpis = new WarehouseKpis();
+        kpis.setOrdersCompleted(0);
+        kpis.setAverageSlaCompliance(100.0);
+        kpis.setCurrentThroughput(0.0);
+
+        Warehouse w = new Warehouse();
+        w.setId(UUID.randomUUID());
+        w.setWidth(width);
+        w.setHeight(height);
+        w.setGrid(grid);
+        w.setRobots(robots);
+        w.setActiveOrders(new ArrayList<>());
+        w.setCompletedOrders(new ArrayList<>());
+        w.setKpis(kpis);
+
+        return w;
     }
 }

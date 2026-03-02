@@ -1,0 +1,315 @@
+﻿[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< com.warehouse:digitaltwin >----------------------
+[INFO] Building digitaltwin 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.3.2:clean (default-clean) @ digitaltwin ---
+[INFO] Deleting C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ digitaltwin ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ digitaltwin ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 38 source files with javac [forked debug release 21] to target\classes
+[WARNING] Unable to autodetect 'javac' path, using 'javac' from the environment.
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\domain\model\Task.java:[9,12] error: cannot find symbol
+  symbol:   class TaskType
+  location: class Task
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\domain\model\Task.java:[16,39] error: cannot find symbol
+  symbol:   class TaskType
+  location: class Task
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\domain\model\Task.java:[40,11] error: cannot find symbol
+  symbol:   class TaskType
+  location: class Task
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\domain\model\Task.java:[44,24] error: cannot find symbol
+  symbol:   class TaskType
+  location: class Task
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\domain\model\WarehouseFactory.java:[57,19] error: no suitable constructor found for Robot(String,GridNode,double,RobotState,double,double,<null>)
+    constructor Robot.Robot() is not applicable
+      (actual and formal argument lists differ in length)
+    constructor Robot.Robot(UUID,String,GridNode,RobotState,double,UUID) is not applicable
+      (actual and formal argument lists differ in length)
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\domain\model\WarehouseFactory.java:[58,19] error: no suitable constructor found for Robot(String,GridNode,double,RobotState,double,double,<null>)
+    constructor Robot.Robot() is not applicable
+      (actual and formal argument lists differ in length)
+    constructor Robot.Robot(UUID,String,GridNode,RobotState,double,UUID) is not applicable
+      (actual and formal argument lists differ in length)
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\domain\model\WarehouseFactory.java:[59,19] error: no suitable constructor found for Robot(String,GridNode,double,RobotState,double,double,<null>)
+    constructor Robot.Robot() is not applicable
+      (actual and formal argument lists differ in length)
+    constructor Robot.Robot(UUID,String,GridNode,RobotState,double,UUID) is not applicable
+      (actual and formal argument lists differ in length)
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\domain\model\WarehouseFactory.java:[61,42] error: cannot find symbol
+  symbol:   method builder()
+  location: class WarehouseKpis
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\domain\model\WarehouseFactory.java:[70,24] error: cannot find symbol
+  symbol:   method builder()
+  location: class Warehouse
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[84,62] error: cannot find symbol
+  symbol:   method getAssignedTask()
+  location: variable robot of type Robot
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[100,25] error: cannot find symbol
+  symbol:   method getAssignedTask()
+  location: variable robot of type Robot
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[101,16] error: cannot find symbol
+  symbol:   method getPathIndex()
+  location: variable task of type Task
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[101,38] error: cannot find symbol
+  symbol:   method getPath()
+  location: variable task of type Task
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[102,34] error: cannot find symbol
+  symbol:   method getPathIndex()
+  location: variable task of type Task
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[103,37] error: cannot find symbol
+  symbol:   method getPath()
+  location: variable task of type Task
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[103,56] error: cannot find symbol
+  symbol:   method getPathIndex()
+  location: variable task of type Task
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[106,43] error: cannot find symbol
+  symbol:   method getDistanceTraveled()
+  location: variable robot of type Robot
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[106,87] error: cannot find symbol
+  symbol:   method getSpeed()
+  location: variable robot of type Robot
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[118,17] error: cannot find symbol
+  symbol:   method setAssignedTask(<null>)
+  location: variable robot of type Robot
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[121,20] error: cannot find symbol
+  symbol:   method getOrder()
+  location: variable task of type Task
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[122,34] error: cannot find symbol
+  symbol:   method getOrder()
+  location: variable task of type Task
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[154,16] error: cannot find symbol
+  symbol:   method builder()
+  location: class WarehouseKpis
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceService.java:[40,18] error: cannot find symbol
+  symbol:   method setState(RobotState)
+  location: variable entity of type RobotEntity
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceService.java:[41,18] error: cannot find symbol
+  symbol:   method setBatteryLevel(double)
+  location: variable entity of type RobotEntity
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceService.java:[47,65] error: invalid method reference
+  cannot find symbol
+    symbol:   method setCurrentNode(T)
+    location: class RobotEntity
+  where T is a type-variable:
+    T extends Object declared in class Optional
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\application\services\PredictiveMaintenanceService.java:[26,17] error: cannot find symbol
+  symbol:   method getDistanceTraveled()
+  location: variable robot of type Robot
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\application\services\PredictiveMaintenanceService.java:[27,73] error: cannot find symbol
+  symbol:   method getDistanceTraveled()
+  location: variable robot of type Robot
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\application\services\PredictiveMaintenanceService.java:[31,44] error: cannot find symbol
+  symbol:   method getDistanceTraveled()
+  location: variable robot of type Robot
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\application\services\EventLoggerService.java:[32,49] error: cannot find symbol
+  symbol:   method builder()
+  location: class EventLogEntity
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\application\services\OrderAssignmentService.java:[46,24] error: cannot find symbol
+  symbol:   method builder()
+  location: class Task
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\application\services\OrderAssignmentService.java:[53,21] error: cannot find symbol
+  symbol:   method setAssignedTask(Task)
+  location: variable assignedRobot of type Robot
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceMapper.java:[16,48] error: cannot find symbol
+  symbol:   method builder()
+  location: class WarehouseEntity
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceMapper.java:[22,14] error: cannot find symbol
+  symbol:   method setGridNodes(List<GridNodeEntity>)
+  location: variable entity of type WarehouseEntity
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceMapper.java:[26,14] error: cannot find symbol
+  symbol:   method setRobots(List<RobotEntity>)
+  location: variable entity of type WarehouseEntity
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceMapper.java:[36,29] error: cannot find symbol
+  symbol:   method builder()
+  location: class GridNodeEntity
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceMapper.java:[47,26] error: cannot find symbol
+  symbol:   method builder()
+  location: class RobotEntity
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceMapper.java:[51,28] error: cannot find symbol
+  symbol:   method getSpeed()
+  location: variable robot of type Robot
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceMapper.java:[59,40] error: cannot find symbol
+  symbol:   method builder()
+  location: class OrderEntity
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceMapper.java:[70,18] error: cannot find symbol
+  symbol:   method setItems(List<OrderItemEntity>)
+  location: variable entity of type OrderEntity
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceMapper.java:[80,30] error: cannot find symbol
+  symbol:   method builder()
+  location: class OrderItemEntity
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\application\services\SimulationService.java:[43,34] error: constructor SimulationEngine in class SimulationEngine cannot be applied to given types;
+  required: no arguments
+  found:    Warehouse,SimpMessagingTemplate,PersistenceService,PredictiveMaintenanceService,EventLoggerService,OrderAssignmentService
+  reason: actual and formal argument lists differ in length
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\application\services\OrderGeneratorService.java:[34,31] error: cannot find symbol
+  symbol:   method builder()
+  location: class OrderItem
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\application\services\OrderGeneratorService.java:[40,20] error: cannot find symbol
+  symbol:   method builder()
+  location: class Order
+[INFO] 43 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  5.019 s
+[INFO] Finished at: 2026-03-02T16:38:29+01:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project digitaltwin: Compilation failure: Compilation failure: 
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\domain\model\Task.java:[9,12] error: cannot find symbol
+[ERROR]   symbol:   class TaskType
+[ERROR]   location: class Task
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\domain\model\Task.java:[16,39] error: cannot find symbol
+[ERROR]   symbol:   class TaskType
+[ERROR]   location: class Task
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\domain\model\Task.java:[40,11] error: cannot find symbol
+[ERROR]   symbol:   class TaskType
+[ERROR]   location: class Task
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\domain\model\Task.java:[44,24] error: cannot find symbol
+[ERROR]   symbol:   class TaskType
+[ERROR]   location: class Task
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\domain\model\WarehouseFactory.java:[57,19] error: no suitable constructor found for Robot(String,GridNode,double,RobotState,double,double,<null>)
+[ERROR]     constructor Robot.Robot() is not applicable
+[ERROR]       (actual and formal argument lists differ in length)
+[ERROR]     constructor Robot.Robot(UUID,String,GridNode,RobotState,double,UUID) is not applicable
+[ERROR]       (actual and formal argument lists differ in length)
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\domain\model\WarehouseFactory.java:[58,19] error: no suitable constructor found for Robot(String,GridNode,double,RobotState,double,double,<null>)
+[ERROR]     constructor Robot.Robot() is not applicable
+[ERROR]       (actual and formal argument lists differ in length)
+[ERROR]     constructor Robot.Robot(UUID,String,GridNode,RobotState,double,UUID) is not applicable
+[ERROR]       (actual and formal argument lists differ in length)
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\domain\model\WarehouseFactory.java:[59,19] error: no suitable constructor found for Robot(String,GridNode,double,RobotState,double,double,<null>)
+[ERROR]     constructor Robot.Robot() is not applicable
+[ERROR]       (actual and formal argument lists differ in length)
+[ERROR]     constructor Robot.Robot(UUID,String,GridNode,RobotState,double,UUID) is not applicable
+[ERROR]       (actual and formal argument lists differ in length)
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\domain\model\WarehouseFactory.java:[61,42] error: cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class WarehouseKpis
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\domain\model\WarehouseFactory.java:[70,24] error: cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class Warehouse
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[84,62] error: cannot find symbol
+[ERROR]   symbol:   method getAssignedTask()
+[ERROR]   location: variable robot of type Robot
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[100,25] error: cannot find symbol
+[ERROR]   symbol:   method getAssignedTask()
+[ERROR]   location: variable robot of type Robot
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[101,16] error: cannot find symbol
+[ERROR]   symbol:   method getPathIndex()
+[ERROR]   location: variable task of type Task
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[101,38] error: cannot find symbol
+[ERROR]   symbol:   method getPath()
+[ERROR]   location: variable task of type Task
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[102,34] error: cannot find symbol
+[ERROR]   symbol:   method getPathIndex()
+[ERROR]   location: variable task of type Task
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[103,37] error: cannot find symbol
+[ERROR]   symbol:   method getPath()
+[ERROR]   location: variable task of type Task
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[103,56] error: cannot find symbol
+[ERROR]   symbol:   method getPathIndex()
+[ERROR]   location: variable task of type Task
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[106,43] error: cannot find symbol
+[ERROR]   symbol:   method getDistanceTraveled()
+[ERROR]   location: variable robot of type Robot
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[106,87] error: cannot find symbol
+[ERROR]   symbol:   method getSpeed()
+[ERROR]   location: variable robot of type Robot
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[118,17] error: cannot find symbol
+[ERROR]   symbol:   method setAssignedTask(<null>)
+[ERROR]   location: variable robot of type Robot
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[121,20] error: cannot find symbol
+[ERROR]   symbol:   method getOrder()
+[ERROR]   location: variable task of type Task
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[122,34] error: cannot find symbol
+[ERROR]   symbol:   method getOrder()
+[ERROR]   location: variable task of type Task
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\engine\SimulationEngine.java:[154,16] error: cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class WarehouseKpis
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceService.java:[40,18] error: cannot find symbol
+[ERROR]   symbol:   method setState(RobotState)
+[ERROR]   location: variable entity of type RobotEntity
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceService.java:[41,18] error: cannot find symbol
+[ERROR]   symbol:   method setBatteryLevel(double)
+[ERROR]   location: variable entity of type RobotEntity
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceService.java:[47,65] error: invalid method reference
+[ERROR]   cannot find symbol
+[ERROR]     symbol:   method setCurrentNode(T)
+[ERROR]     location: class RobotEntity
+[ERROR]   where T is a type-variable:
+[ERROR]     T extends Object declared in class Optional
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\application\services\PredictiveMaintenanceService.java:[26,17] error: cannot find symbol
+[ERROR]   symbol:   method getDistanceTraveled()
+[ERROR]   location: variable robot of type Robot
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\application\services\PredictiveMaintenanceService.java:[27,73] error: cannot find symbol
+[ERROR]   symbol:   method getDistanceTraveled()
+[ERROR]   location: variable robot of type Robot
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\application\services\PredictiveMaintenanceService.java:[31,44] error: cannot find symbol
+[ERROR]   symbol:   method getDistanceTraveled()
+[ERROR]   location: variable robot of type Robot
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\application\services\EventLoggerService.java:[32,49] error: cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class EventLogEntity
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\application\services\OrderAssignmentService.java:[46,24] error: cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class Task
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\application\services\OrderAssignmentService.java:[53,21] error: cannot find symbol
+[ERROR]   symbol:   method setAssignedTask(Task)
+[ERROR]   location: variable assignedRobot of type Robot
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceMapper.java:[16,48] error: cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class WarehouseEntity
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceMapper.java:[22,14] error: cannot find symbol
+[ERROR]   symbol:   method setGridNodes(List<GridNodeEntity>)
+[ERROR]   location: variable entity of type WarehouseEntity
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceMapper.java:[26,14] error: cannot find symbol
+[ERROR]   symbol:   method setRobots(List<RobotEntity>)
+[ERROR]   location: variable entity of type WarehouseEntity
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceMapper.java:[36,29] error: cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class GridNodeEntity
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceMapper.java:[47,26] error: cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class RobotEntity
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceMapper.java:[51,28] error: cannot find symbol
+[ERROR]   symbol:   method getSpeed()
+[ERROR]   location: variable robot of type Robot
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceMapper.java:[59,40] error: cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class OrderEntity
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceMapper.java:[70,18] error: cannot find symbol
+[ERROR]   symbol:   method setItems(List<OrderItemEntity>)
+[ERROR]   location: variable entity of type OrderEntity
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\infrastructure\persistence\PersistenceMapper.java:[80,30] error: cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class OrderItemEntity
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\application\services\SimulationService.java:[43,34] error: constructor SimulationEngine in class SimulationEngine cannot be applied to given types;
+[ERROR]   required: no arguments
+[ERROR]   found:    Warehouse,SimpMessagingTemplate,PersistenceService,PredictiveMaintenanceService,EventLoggerService,OrderAssignmentService
+[ERROR]   reason: actual and formal argument lists differ in length
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\application\services\OrderGeneratorService.java:[34,31] error: cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class OrderItem
+[ERROR] C:\GaldusSDAI\SDAI-Sacchi\digita-twin-warehouse\backend\src\main\java\com\warehouse\digitaltwin\application\services\OrderGeneratorService.java:[40,20] error: cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class Order
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

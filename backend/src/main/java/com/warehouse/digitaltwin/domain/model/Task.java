@@ -4,6 +4,8 @@ import java.util.UUID;
 import java.util.List;
 
 public class Task {
+    private Order order;
+    private int pathIndex;
     private UUID id;
     private UUID orderId;
     private TaskType type;
@@ -60,4 +62,10 @@ public class Task {
     public void setCurrentPath(List<GridNode> currentPath) {
         this.currentPath = currentPath;
     }
-}
+
+    public Order getOrder() { return order; }
+    public void setOrder(Order order) { this.order = order; }
+    public int getPathIndex() { return pathIndex; }
+    public void setPathIndex(int pathIndex) { this.pathIndex = pathIndex; }
+    public java.util.List<GridNode> getPath() { return currentPath; }
+    }

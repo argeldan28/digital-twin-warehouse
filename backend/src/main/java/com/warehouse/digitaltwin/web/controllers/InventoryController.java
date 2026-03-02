@@ -44,4 +44,6 @@ public class InventoryController {
         log.info("Fetched {} inventory items", inventory.size());
         return ResponseEntity.ok(inventory);
     }
+    public final SimulationService getSimulationService() { return simulationService; }
+    public void setSimulationService(final SimulationService simulationService) { this.simulationService = simulationService; }
 }

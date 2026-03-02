@@ -2,17 +2,11 @@ package com.warehouse.digitaltwin.infrastructure.persistence.entities;
 
 import com.warehouse.digitaltwin.domain.model.RobotState;
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.util.UUID;
 
 @Entity
 @Table(name = "robots")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class RobotEntity {
 
     @Id
@@ -31,4 +25,16 @@ public class RobotEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "warehouse_id")
     private WarehouseEntity warehouse;
+    public UUID getId() { return id; }
+    public void setId(UUID id) { this.id = id; }
+    public RobotState getState() { return state; }
+    public void setState(RobotState state) { this.state = state; }
+    public double getBatteryLevel() { return batteryLevel; }
+    public void setBatteryLevel(double batteryLevel) { this.batteryLevel = batteryLevel; }
+    public double getSpeed() { return speed; }
+    public void setSpeed(double speed) { this.speed = speed; }
+    public GridNodeEntity getCurrentNode() { return currentNode; }
+    public void setCurrentNode(GridNodeEntity currentNode) { this.currentNode = currentNode; }
+    public WarehouseEntity getWarehouse() { return warehouse; }
+    public void setWarehouse(WarehouseEntity warehouse) { this.warehouse = warehouse; }
 }

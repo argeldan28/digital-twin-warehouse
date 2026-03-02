@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 
 @Service
 
-
 public class EventLoggerService {
 
     private static final Logger log = LoggerFactory.getLogger(EventLoggerService.class);
@@ -29,16 +28,31 @@ public class EventLoggerService {
         try {
             String payload = objectMapper.writeValueAsString(warehouse);
 
-            EventLogEntity event = EventLogEntity.builder()
-                    .warehouseId(warehouse.getId())
-                    .eventType("STATE_UPDATE")
-                    .payload(payload)
-                    .timestamp(LocalDateTime.now())
-                    .build();
+            EventLogEntity event = new EventLogEntity();
+            event.setWarehouseId(warehouse.getId());
+            event.setEventType("STATE_UPDATE");
+            event.setPayload(payload);
+            event.setTimestamp(LocalDateTime.now());
 
             eventLogRepository.save(event);
         } catch (JsonProcessingException e) {
             log.error("Failed to serialize warehouse state for event logging", e);
         }
+    }
+
+    public final EventLogRepository getEventLogRepository() {
+        return eventLogRepository;
+    }
+
+    public void setEventLogRepository(final EventLogRepository eventLogRepository) {
+        this.eventLogRepository = eventLogRepository;
+    }
+
+    public final ObjectMapper getObjectMapper() {
+        return objectMapper;
+    }
+
+    public void setObjectMapper(final ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
     }
 }
