@@ -28,6 +28,11 @@ public class InventoryController {
 
     private final SimulationService simulationService;
 
+    public InventoryController(SimulationService simulationService) {
+        this.simulationService = simulationService;
+    }
+
+
     @GetMapping
     public ResponseEntity<List<InventoryItem>> getWarehouseInventory() {
         Warehouse currentWarehouse = simulationService.getCurrentWarehouse();
@@ -45,5 +50,4 @@ public class InventoryController {
         return ResponseEntity.ok(inventory);
     }
     public final SimulationService getSimulationService() { return simulationService; }
-    public void setSimulationService(final SimulationService simulationService) { this.simulationService = simulationService; }
 }

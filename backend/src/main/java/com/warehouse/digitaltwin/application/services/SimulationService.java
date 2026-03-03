@@ -28,6 +28,15 @@ public class SimulationService {
     private final PredictiveMaintenanceService predictiveMaintenanceService;
     private final EventLoggerService eventLoggerService;
     private final OrderAssignmentService orderAssignmentService;
+
+    public SimulationService(SimpMessagingTemplate messagingTemplate, PersistenceService persistenceService, PredictiveMaintenanceService predictiveMaintenanceService, EventLoggerService eventLoggerService, OrderAssignmentService orderAssignmentService) {
+        this.messagingTemplate = messagingTemplate;
+        this.persistenceService = persistenceService;
+        this.predictiveMaintenanceService = predictiveMaintenanceService;
+        this.eventLoggerService = eventLoggerService;
+        this.orderAssignmentService = orderAssignmentService;
+    }
+
     private final Map<UUID, SimulationEngine> activeEngines = new ConcurrentHashMap<>();
     private final ExecutorService executorService = Executors.newCachedThreadPool();
 
@@ -63,13 +72,8 @@ public class SimulationService {
         return activeEngines.values().iterator().next().getWarehouse();
     }
     public final SimpMessagingTemplate getMessagingTemplate() { return messagingTemplate; }
-    public void setMessagingTemplate(final SimpMessagingTemplate messagingTemplate) { this.messagingTemplate = messagingTemplate; }
     public final PersistenceService getPersistenceService() { return persistenceService; }
-    public void setPersistenceService(final PersistenceService persistenceService) { this.persistenceService = persistenceService; }
     public final PredictiveMaintenanceService getPredictiveMaintenanceService() { return predictiveMaintenanceService; }
-    public void setPredictiveMaintenanceService(final PredictiveMaintenanceService predictiveMaintenanceService) { this.predictiveMaintenanceService = predictiveMaintenanceService; }
     public final EventLoggerService getEventLoggerService() { return eventLoggerService; }
-    public void setEventLoggerService(final EventLoggerService eventLoggerService) { this.eventLoggerService = eventLoggerService; }
     public final OrderAssignmentService getOrderAssignmentService() { return orderAssignmentService; }
-    public void setOrderAssignmentService(final OrderAssignmentService orderAssignmentService) { this.orderAssignmentService = orderAssignmentService; }
 }

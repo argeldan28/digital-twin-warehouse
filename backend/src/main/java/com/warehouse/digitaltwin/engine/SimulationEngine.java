@@ -18,8 +18,6 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-
-
 public class SimulationEngine implements Runnable {
 
     private static final Logger log = LoggerFactory.getLogger(SimulationEngine.class);
@@ -31,7 +29,9 @@ public class SimulationEngine implements Runnable {
     private final EventLoggerService eventLoggerService;
     private final OrderAssignmentService orderAssignmentService;
 
-    public SimulationEngine(Warehouse warehouse, SimpMessagingTemplate messagingTemplate, PersistenceService persistenceService, PredictiveMaintenanceService predictiveMaintenanceService, EventLoggerService eventLoggerService, OrderAssignmentService orderAssignmentService) {
+    public SimulationEngine(Warehouse warehouse, SimpMessagingTemplate messagingTemplate,
+            PersistenceService persistenceService, PredictiveMaintenanceService predictiveMaintenanceService,
+            EventLoggerService eventLoggerService, OrderAssignmentService orderAssignmentService) {
         this.warehouse = warehouse;
         this.messagingTemplate = messagingTemplate;
         this.persistenceService = persistenceService;
@@ -76,7 +76,7 @@ public class SimulationEngine implements Runnable {
     }
 
     private void broadcastState() {
-        messagingTemplate.convertAndSend("/topic/warehouse/state", warehouse);
+        messagingTemplate.convertAndSend("/topic/warehouse/state/" + warehouse.getId(), warehouse);
     }
 
     private void assignOrders() {
@@ -100,7 +100,7 @@ public class SimulationEngine implements Runnable {
             if (robot.getState() != RobotState.CHARGING) {
                 robot.setBatteryLevel(Math.max(0, robot.getBatteryLevel() - 0.01));
                 if (robot.getBatteryLevel() < 10 && robot.getState() != RobotState.ERROR) {
-                    log.warn("Robot {} battery low!", robot.getId());
+                    log.trace("Robot {} battery low!", robot.getId());
                 }
             }
         }
@@ -160,15 +160,10 @@ public class SimulationEngine implements Runnable {
                 .filter(o -> o.getCompletedAt() != null && o.getCompletedAt().isAfter(oneHourAgo))
                 .count();
 
-        com.warehouse.digitaltwin.domain.model.WarehouseKpis kpis = com.warehouse.digitaltwin.domain.model.WarehouseKpis
-                .builder()
-                .activeRobots(activeRobots)
-                .averageBatteryLevel(avgBattery)
-                .averageRobotUtilization(utilization)
-                .pendingOrders(warehouse.getActiveOrders().size())
-                .totalOrdersCompleted(warehouse.getCompletedOrders().size())
-                .throughputPerHour((double) completedInLastHour)
-                .build();
+        com.warehouse.digitaltwin.domain.model.WarehouseKpis kpis = new com.warehouse.digitaltwin.domain.model.WarehouseKpis();
+        kpis.setOrdersCompleted(warehouse.getCompletedOrders().size());
+        kpis.setAverageSlaCompliance(utilization);
+        kpis.setCurrentThroughput((double) completedInLastHour);
 
         warehouse.setKpis(kpis);
     }
@@ -185,15 +180,24 @@ public class SimulationEngine implements Runnable {
             }
         }
     }
-    public void setWarehouse(final Warehouse warehouse) { this.warehouse = warehouse; }
-    public final SimpMessagingTemplate getMessagingTemplate() { return messagingTemplate; }
-    public void setMessagingTemplate(final SimpMessagingTemplate messagingTemplate) { this.messagingTemplate = messagingTemplate; }
-    public final PersistenceService getPersistenceService() { return persistenceService; }
-    public void setPersistenceService(final PersistenceService persistenceService) { this.persistenceService = persistenceService; }
-    public final PredictiveMaintenanceService getPredictiveMaintenanceService() { return predictiveMaintenanceService; }
-    public void setPredictiveMaintenanceService(final PredictiveMaintenanceService predictiveMaintenanceService) { this.predictiveMaintenanceService = predictiveMaintenanceService; }
-    public final EventLoggerService getEventLoggerService() { return eventLoggerService; }
-    public void setEventLoggerService(final EventLoggerService eventLoggerService) { this.eventLoggerService = eventLoggerService; }
-    public final OrderAssignmentService getOrderAssignmentService() { return orderAssignmentService; }
-    public void setOrderAssignmentService(final OrderAssignmentService orderAssignmentService) { this.orderAssignmentService = orderAssignmentService; }
+
+    public final SimpMessagingTemplate getMessagingTemplate() {
+        return messagingTemplate;
+    }
+
+    public final PersistenceService getPersistenceService() {
+        return persistenceService;
+    }
+
+    public final PredictiveMaintenanceService getPredictiveMaintenanceService() {
+        return predictiveMaintenanceService;
+    }
+
+    public final EventLoggerService getEventLoggerService() {
+        return eventLoggerService;
+    }
+
+    public final OrderAssignmentService getOrderAssignmentService() {
+        return orderAssignmentService;
+    }
 }

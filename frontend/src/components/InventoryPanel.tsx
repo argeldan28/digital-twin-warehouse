@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import type { InventoryItem } from '../types/warehouse';
+import { Package, MapPin } from 'lucide-react';
 
 interface InventoryPanelProps {
     fetchInventory: () => Promise<InventoryItem[]>;
@@ -35,34 +36,39 @@ const InventoryPanel: React.FC<InventoryPanelProps> = ({ fetchInventory, connect
     const totalItems = inventory.reduce((acc, item) => acc + item.quantity, 0);
 
     return (
-        <div className="glass-panel" style={{ padding: '24px', flex: 1, overflowY: 'auto', maxHeight: '420px', display: 'flex', flexDirection: 'column' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                <h3 style={{ margin: 0, color: 'var(--slate-700)', fontSize: '1.2rem' }}>Warehouse Inventory</h3>
-                <span style={{ fontSize: '12px', fontWeight: 'bold', padding: '4px 8px', backgroundColor: 'var(--primary-100)', color: 'var(--primary-600)', borderRadius: '12px' }}>
+        <div className="flex flex-col h-full overflow-hidden">
+            <div className="flex justify-between items-center mb-4 pb-2 border-b border-[var(--color-surface-tertiary)]">
+                <h3 className="m-0 text-sm font-semibold text-[var(--color-text-primary)] flex items-center gap-2">
+                    <Package size={16} /> Warehouse Inventory
+                </h3>
+                <span className="badge badge-info">
                     {totalItems} Items Total
                 </span>
             </div>
 
-            {loading && inventory.length === 0 ? (
-                <div style={{ textAlign: 'center', color: 'var(--slate-400)', padding: '20px' }}>Loading...</div>
-            ) : inventory.length === 0 ? (
-                <div style={{ textAlign: 'center', color: 'var(--slate-400)', padding: '20px' }}>No items in inventory.</div>
-            ) : (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                    {inventory.map((item) => (
-                        <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px', backgroundColor: 'var(--slate-50)', border: '1px solid var(--slate-200)', borderRadius: '8px' }}>
-                            <div>
-                                <p style={{ margin: 0, fontWeight: '600', color: 'var(--slate-700)', fontSize: '14px' }}>{item.product.name}</p>
-                                <p style={{ margin: '4px 0 0 0', fontSize: '11px', color: 'var(--slate-500)', fontFamily: 'monospace' }}>SKU: {item.product.sku} | Loc: ({item.location.x}, {item.location.y})</p>
+            <div className="flex-1 overflow-y-auto pr-1 flex flex-col gap-2">
+                {loading && inventory.length === 0 ? (
+                    <div className="text-center text-zinc-500 py-6 text-sm">Loading inventory...</div>
+                ) : inventory.length === 0 ? (
+                    <div className="text-center text-zinc-500 py-6 text-sm">No items in warehouse.</div>
+                ) : (
+                    inventory.map((item) => (
+                        <div key={item.id} className="bg-[var(--color-surface-secondary)] border border-[var(--color-surface-tertiary)] p-3 rounded-md flex justify-between items-center transition-colors hover:bg-[var(--color-surface-tertiary)]/30">
+                            <div className="flex flex-col gap-1">
+                                <p className="m-0 font-medium text-[var(--color-text-primary)] text-sm leading-none">{item.product.name}</p>
+                                <div className="flex items-center gap-2 text-xs text-[var(--color-text-secondary)] font-mono mt-1">
+                                    <span>#{item.product.sku}</span>
+                                    <span className="flex items-center gap-1"><MapPin size={10} /> {item.location.x},{item.location.y}</span>
+                                </div>
                             </div>
-                            <div style={{ textAlign: 'right' }}>
-                                <span style={{ fontSize: '18px', fontWeight: 'bold', color: 'var(--primary-600)' }}>{item.quantity}</span>
-                                <span style={{ fontSize: '11px', color: 'var(--slate-500)', marginLeft: '4px' }}>pz</span>
+                            <div className="text-right flex items-baseline gap-1">
+                                <span className="text-xl font-bold text-brand-base">{item.quantity}</span>
+                                <span className="text-xs text-zinc-500 uppercase">pz</span>
                             </div>
                         </div>
-                    ))}
-                </div>
-            )}
+                    ))
+                )}
+            </div>
         </div>
     );
 };

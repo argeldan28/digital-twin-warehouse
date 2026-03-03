@@ -1,77 +1,137 @@
+import React, { useEffect, useRef, useState } from 'react';
 import { NodeTypes } from '../types/warehouse';
-import type { Warehouse, NodeType } from '../types/warehouse';
-import { motion } from 'framer-motion';
+import type { Warehouse } from '../types/warehouse';
+import { Stage, Layer, Rect, Circle, Text, Group } from 'react-konva';
 
 interface WarehouseGridProps {
     warehouse: Warehouse;
+    robotNames?: Record<string, string>;
 }
 
-const WarehouseGrid: React.FC<WarehouseGridProps> = ({ warehouse }) => {
-    const cellSize = 30;
+const colorMap = {
+    [NodeTypes.WALKABLE]: '#09090b', // bg-canvas
+    [NodeTypes.SHELF]: '#3f3f46',    // surface-tertiary
+    [NodeTypes.STATION]: '#0ea5e9',  // brand-base
+    [NodeTypes.OBSTACLE]: '#ef4444', // status-critical
+};
 
-    const getNodeColor = (type: NodeType) => {
-        switch (type) {
-            case NodeTypes.SHELF: return 'var(--slate-500)';
-            case NodeTypes.OBSTACLE: return 'var(--slate-800)';
-            case NodeTypes.STATION: return 'var(--primary-500)';
-            default: return 'var(--slate-50)';
-        }
-    };
+const WarehouseGrid: React.FC<WarehouseGridProps> = ({ warehouse, robotNames }) => {
+    // Determine cell size dynamically or set statically
+    const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    // We compute a static cell size, but we let canvas scale or overflow if necessary.
+    const cellSize = 30;
+    const gridPixelWidth = warehouse.width * cellSize;
+    const gridPixelHeight = warehouse.height * cellSize;
+
+    const stageWidth = Math.max(containerSize.width || gridPixelWidth, gridPixelWidth);
+    const stageHeight = Math.max(containerSize.height || gridPixelHeight, gridPixelHeight);
+
+    const offsetX = containerSize.width > gridPixelWidth ? (containerSize.width - gridPixelWidth) / 2 : 0;
+    const offsetY = containerSize.height > gridPixelHeight ? (containerSize.height - gridPixelHeight) / 2 : 0;
+
+    useEffect(() => {
+        if (!containerRef.current) return;
+        const resizeObserver = new ResizeObserver(entries => {
+            for (let entry of entries) {
+                setContainerSize({
+                    width: entry.contentRect.width,
+                    height: entry.contentRect.height
+                });
+            }
+        });
+        resizeObserver.observe(containerRef.current);
+        return () => resizeObserver.disconnect();
+    }, []);
+
+    // A simple function to interpolate (lerp or animate could be added via Konva's useFrame or similar, 
+    // but for now, we just update the explicit X/Y prop bindings. Real-time updates push new positions naturally).
 
     return (
-        <div style={{ position: 'relative', width: '100%', height: '100%', minWidth: warehouse.width * cellSize, minHeight: warehouse.height * cellSize, backgroundColor: 'var(--slate-100)', borderRadius: '12px', overflow: 'hidden', boxShadow: 'inset var(--shadow-md)' }}>
-            {/* Render Nodes */}
-            {warehouse.grid.map((node, index) => (
-                <div
-                    key={index}
-                    style={{
-                        position: 'absolute',
-                        left: node.x * cellSize + 1,
-                        top: node.y * cellSize + 1,
-                        width: cellSize - 2,
-                        height: cellSize - 2,
-                        backgroundColor: getNodeColor(node.type),
-                        borderRadius: node.type !== NodeTypes.WALKABLE ? '4px' : '2px',
-                        boxShadow: node.type !== NodeTypes.WALKABLE ? 'var(--shadow-sm)' : 'none',
-                        transition: 'background-color 0.3s ease'
-                    }}
-                />
-            ))}
+        <div ref={containerRef} className="w-full h-full min-h-[500px] bg-[var(--color-surface-secondary)] rounded-lg overflow-auto border border-[var(--color-surface-tertiary)] shadow-inner">
+            <Stage width={stageWidth} height={stageHeight}>
+                {/* Layer 1: The Grid Canvas */}
+                <Layer x={offsetX} y={offsetY}>
+                    {/* Grid Background Lines (Blueprint style) */}
+                    {Array.from({ length: warehouse.width + 1 }).map((_, i) => (
+                        <Rect key={`vline-${i}`} x={i * cellSize} y={0} width={1} height={warehouse.height * cellSize} fill="rgba(255,255,255,0.03)" />
+                    ))}
+                    {Array.from({ length: warehouse.height + 1 }).map((_, i) => (
+                        <Rect key={`hline-${i}`} x={0} y={i * cellSize} width={warehouse.width * cellSize} height={1} fill="rgba(255,255,255,0.03)" />
+                    ))}
 
-            {/* Render Robots */}
-            {warehouse.robots.map((robot) => (
-                <motion.div
-                    key={robot.id}
-                    initial={false}
-                    animate={{
-                        left: robot.currentNode.x * cellSize,
-                        top: robot.currentNode.y * cellSize,
-                        scale: robot.state === 'MOVING' ? [1, 1.1, 1] : 1
-                    }}
-                    transition={{
-                        left: { type: 'spring', stiffness: 100, damping: 20 },
-                        top: { type: 'spring', stiffness: 100, damping: 20 },
-                        scale: { repeat: robot.state === 'MOVING' ? Infinity : 0, duration: 1 }
-                    }}
-                    style={{
-                        position: 'absolute',
-                        width: cellSize,
-                        height: cellSize,
-                        backgroundColor: robot.state === 'ERROR' ? 'var(--danger-bg)' : robot.state === 'MAINTENANCE' ? 'var(--warning-bg)' : 'var(--primary-600)',
-                        borderRadius: '50%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'white',
-                        fontSize: '14px',
-                        zIndex: 10,
-                        boxShadow: 'var(--shadow-md)',
-                        border: '2px solid white'
-                    }}
-                >
-                    {robot.state === 'ERROR' ? '⚠️' : robot.state === 'MAINTENANCE' ? '🔧' : '⚡'}
-                </motion.div>
-            ))}
+                    {/* Node blocks */}
+                    {warehouse.grid.map((node, index) => {
+                        if (node.type === NodeTypes.WALKABLE) return null; // Save draw calls for empty space
+                        const color = colorMap[node.type as keyof typeof colorMap] || '#3f3f46';
+                        return (
+                            <Rect
+                                key={`node-${index}`}
+                                x={node.x * cellSize + 1.5}
+                                y={node.y * cellSize + 1.5}
+                                width={cellSize - 3}
+                                height={cellSize - 3}
+                                fill={color}
+                                cornerRadius={node.type === NodeTypes.STATION ? 4 : 2}
+                                opacity={node.type === NodeTypes.SHELF ? 0.7 : 1}
+                            />
+                        );
+                    })}
+                </Layer>
+
+                {/* Layer 2: The Entities & Robots */}
+                <Layer x={offsetX} y={offsetY}>
+                    {warehouse.robots.map((robot) => {
+                        const isError = robot.state === 'ERROR';
+                        const isMaintenance = robot.state === 'MAINTENANCE';
+                        const bgColor = isError ? '#ef4444' : isMaintenance ? '#f59e0b' : '#38bdf8'; // Accent Cyan for healthy androids
+                        const robotNo = robotNames && robotNames[robot.id] ? robotNames[robot.id].replace('Android ', '') : '!';
+
+                        // We use a Group to easily manipulate the unit
+                        return (
+                            <Group
+                                key={`robot-${robot.id}`}
+                                x={robot.currentNode.x * cellSize + (cellSize / 2)}
+                                y={robot.currentNode.y * cellSize + (cellSize / 2)}
+                            >
+                                {/* Glow Ring */}
+                                {robot.state === 'MOVING' && (
+                                    <Circle
+                                        radius={(cellSize / 2) + 4}
+                                        fill="transparent"
+                                        stroke={bgColor}
+                                        strokeWidth={1}
+                                        opacity={0.4}
+                                    />
+                                )}
+
+                                {/* Robot Body */}
+                                <Circle
+                                    radius={(cellSize / 2) - 3}
+                                    fill={bgColor}
+                                    shadowColor={bgColor}
+                                    shadowBlur={8}
+                                    shadowOpacity={0.6}
+                                />
+
+                                {/* Robot internal text/identifier */}
+                                <Text
+                                    text={isError ? '⚠️' : isMaintenance ? '🔧' : robotNo}
+                                    fontSize={12}
+                                    fontFamily="JetBrains Mono, monospace"
+                                    fontStyle="bold"
+                                    fill={isError || isMaintenance ? 'white' : '#0f172a'}
+                                    align="center"
+                                    verticalAlign="middle"
+                                    offsetX={isError || isMaintenance ? 7 : 4}
+                                    offsetY={6}
+                                />
+                            </Group>
+                        );
+                    })}
+                </Layer>
+            </Stage>
         </div>
     );
 };

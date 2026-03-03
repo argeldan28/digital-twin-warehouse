@@ -95,8 +95,8 @@ public class WarehouseFactory {
         w.setHeight(height);
         w.setGrid(grid);
         w.setRobots(robots);
-        w.setActiveOrders(new ArrayList<>());
-        w.setCompletedOrders(new ArrayList<>());
+        w.setActiveOrders(new java.util.concurrent.CopyOnWriteArrayList<>());
+        w.setCompletedOrders(new java.util.concurrent.CopyOnWriteArrayList<>());
         w.setKpis(kpis);
 
         return w;

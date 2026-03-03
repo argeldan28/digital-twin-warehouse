@@ -22,7 +22,6 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/simulation")
 
-
 public class SimulationController {
 
     private static final Logger log = LoggerFactory.getLogger(SimulationController.class);
@@ -31,32 +30,54 @@ public class SimulationController {
     private final WarehouseFactory warehouseFactory;
     private final EventLogRepository eventLogRepository;
 
-    // For MVP, track a single active warehouse session from the frontend
-    private Warehouse currentWarehouse;
-
-    @PostMapping("/start")
-    public ResponseEntity<String> startSimulation() {
-        if (currentWarehouse == null) {
-            currentWarehouse = warehouseFactory.createDefaultWarehouse();
-        }
-        simulationService.startSimulation(currentWarehouse);
-        log.info("Started default simulation session: {}", currentWarehouse.getId());
-        return ResponseEntity.ok("Simulation started for warehouse: " + currentWarehouse.getId());
+    public SimulationController(SimulationService simulationService, WarehouseFactory warehouseFactory,
+            EventLogRepository eventLogRepository) {
+        this.simulationService = simulationService;
+        this.warehouseFactory = warehouseFactory;
+        this.eventLogRepository = eventLogRepository;
     }
 
-    @PostMapping("/stop")
-    public ResponseEntity<String> stopSimulation() {
-        if (currentWarehouse != null) {
-            simulationService.stopSimulation(currentWarehouse.getId());
-            log.info("Stopped default simulation session: {}", currentWarehouse.getId());
+    // For MVP, we'll keep a list of active warehouses
+    private final java.util.Map<UUID, Warehouse> activeWarehouses = new java.util.concurrent.ConcurrentHashMap<>();
+
+    @PostMapping("/warehouses/spawn")
+    public ResponseEntity<Warehouse> spawnWarehouse() {
+        Warehouse newWarehouse = warehouseFactory.createDefaultWarehouse();
+        activeWarehouses.put(newWarehouse.getId(), newWarehouse);
+        simulationService.startSimulation(newWarehouse);
+        log.info("Spawned new warehouse facility: {}", newWarehouse.getId());
+        return ResponseEntity.ok(newWarehouse);
+    }
+
+    @GetMapping("/warehouses")
+    public ResponseEntity<java.util.Collection<Warehouse>> getWarehouses() {
+        return ResponseEntity.ok(activeWarehouses.values());
+    }
+
+    @PostMapping("/start/{id}")
+    public ResponseEntity<String> startSimulation(@PathVariable UUID id) {
+        Warehouse w = activeWarehouses.get(id);
+        if (w != null) {
+            simulationService.startSimulation(w);
+            return ResponseEntity.ok("Simulation started for warehouse: " + id);
+        }
+        return ResponseEntity.badRequest().body("Warehouse not found");
+    }
+
+    @PostMapping("/stop/{id}")
+    public ResponseEntity<String> stopSimulation(@PathVariable UUID id) {
+        if (activeWarehouses.containsKey(id)) {
+            simulationService.stopSimulation(id);
+            log.info("Stopped simulation for warehouse: {}", id);
         }
         return ResponseEntity.ok("Simulation stopped");
     }
 
-    @PostMapping("/orders/inject")
-    public ResponseEntity<String> injectOrder() {
-        if (currentWarehouse == null) {
-            return ResponseEntity.badRequest().body("Simulation not started.");
+    @PostMapping("/orders/inject/{id}")
+    public ResponseEntity<String> injectOrder(@PathVariable UUID id) {
+        Warehouse w = activeWarehouses.get(id);
+        if (w == null) {
+            return ResponseEntity.badRequest().body("Warehouse not found.");
         }
 
         Order order = new Order();
@@ -69,22 +90,22 @@ public class SimulationController {
         item.setId(UUID.randomUUID());
         item.setProductName("Dummy Item");
         item.setQuantity(1);
-        item.setLocation(getRandomTargetNode());
+        item.setLocation(getRandomTargetNode(w));
         order.setItems(Collections.singletonList(item));
 
-        currentWarehouse.getActiveOrders().add(order);
-        log.info("Injected new order: {}", order.getId());
+        w.getActiveOrders().add(order);
+        log.info("Injected new order: {} into warehouse {}", order.getId(), id);
 
         return ResponseEntity.ok("Order injected: " + order.getId());
     }
 
-    @PostMapping("/scenarios/stress")
-    public ResponseEntity<String> triggerStressTest() {
-        if (currentWarehouse == null) {
-            return ResponseEntity.badRequest().body("Simulation not started.");
+    @PostMapping("/scenarios/stress/{id}")
+    public ResponseEntity<String> triggerStressTest(@PathVariable UUID id) {
+        Warehouse w = activeWarehouses.get(id);
+        if (w == null) {
+            return ResponseEntity.badRequest().body("Warehouse not found.");
         }
 
-        // Stress test injects 50 random orders at once
         for (int i = 0; i < 50; i++) {
             Order order = new Order();
             order.setId(UUID.randomUUID());
@@ -96,13 +117,12 @@ public class SimulationController {
             item.setId(UUID.randomUUID());
             item.setProductName("Stress Item " + i);
             item.setQuantity(1);
-            item.setLocation(getRandomTargetNode());
+            item.setLocation(getRandomTargetNode(w));
             order.setItems(Collections.singletonList(item));
 
-            currentWarehouse.getActiveOrders().add(order);
+            w.getActiveOrders().add(order);
         }
 
-        log.info("Scenario Stress Test Triggered! 50 orders injected.");
         return ResponseEntity.ok("Stress Test Triggered. 50 orders injected.");
     }
 
@@ -112,30 +132,20 @@ public class SimulationController {
             return ResponseEntity.badRequest().body("Invalid warehouse ID");
         }
         var logs = eventLogRepository.findByWarehouseIdOrderByTimestampAsc(warehouseId);
-        log.info("Fetched {} logs for replay of warehouse {}", logs.size(), warehouseId);
         return ResponseEntity.ok(logs);
     }
 
-    private com.warehouse.digitaltwin.domain.model.GridNode getRandomTargetNode() {
-        if (currentWarehouse == null || currentWarehouse.getGrid() == null || currentWarehouse.getGrid().isEmpty()) {
+    private com.warehouse.digitaltwin.domain.model.GridNode getRandomTargetNode(Warehouse w) {
+        if (w == null || w.getGrid() == null || w.getGrid().isEmpty()) {
             return null;
         }
         Random random = new Random();
-        // Return a random node from the grid that is NOT an OBSTACLE.
-        return currentWarehouse.getGrid().stream()
+        return w.getGrid().stream()
                 .filter(node -> node.getType() != com.warehouse.digitaltwin.domain.model.NodeType.OBSTACLE)
-                .skip(random.nextInt((int) currentWarehouse.getGrid().stream()
+                .skip(random.nextInt((int) w.getGrid().stream()
                         .filter(node -> node.getType() != com.warehouse.digitaltwin.domain.model.NodeType.OBSTACLE)
                         .count()))
                 .findFirst()
-                .orElse(currentWarehouse.getGrid().get(0));
+                .orElse(w.getGrid().get(0));
     }
-    public final SimulationService getSimulationService() { return simulationService; }
-    public void setSimulationService(final SimulationService simulationService) { this.simulationService = simulationService; }
-    public final WarehouseFactory getWarehouseFactory() { return warehouseFactory; }
-    public void setWarehouseFactory(final WarehouseFactory warehouseFactory) { this.warehouseFactory = warehouseFactory; }
-    public final EventLogRepository getEventLogRepository() { return eventLogRepository; }
-    public void setEventLogRepository(final EventLogRepository eventLogRepository) { this.eventLogRepository = eventLogRepository; }
-    public Warehouse getCurrentWarehouse() { return currentWarehouse; }
-    public void setCurrentWarehouse(Warehouse currentWarehouse) { this.currentWarehouse = currentWarehouse; }
 }

@@ -25,13 +25,12 @@ class DomainModelTest {
     @Test
     void testRobotCreation() {
         GridNode startNode = new GridNode(0, 0, NodeType.STATION);
-        Robot robot = Robot.builder()
-                .id(UUID.randomUUID())
-                .currentNode(startNode)
-                .batteryLevel(100.0)
-                .state(RobotState.IDLE)
-                .speed(1.0)
-                .build();
+        Robot robot = new Robot();
+        robot.setId(UUID.randomUUID());
+        robot.setCurrentNode(startNode);
+        robot.setBatteryLevel(100.0);
+        robot.setState(RobotState.IDLE);
+        robot.setSpeed(1.0);
 
         assertNotNull(robot.getId());
         assertEquals(RobotState.IDLE, robot.getState());

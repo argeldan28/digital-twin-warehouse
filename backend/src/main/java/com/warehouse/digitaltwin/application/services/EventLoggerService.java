@@ -23,6 +23,12 @@ public class EventLoggerService {
     private final EventLogRepository eventLogRepository;
     private final ObjectMapper objectMapper;
 
+    public EventLoggerService(EventLogRepository eventLogRepository, ObjectMapper objectMapper) {
+        this.eventLogRepository = eventLogRepository;
+        this.objectMapper = objectMapper;
+    }
+
+
     @Async
     public void logState(Warehouse warehouse) {
         try {
@@ -44,15 +50,7 @@ public class EventLoggerService {
         return eventLogRepository;
     }
 
-    public void setEventLogRepository(final EventLogRepository eventLogRepository) {
-        this.eventLogRepository = eventLogRepository;
-    }
-
     public final ObjectMapper getObjectMapper() {
         return objectMapper;
-    }
-
-    public void setObjectMapper(final ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
     }
 }
