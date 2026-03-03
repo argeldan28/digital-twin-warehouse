@@ -176,11 +176,13 @@ const App = () => {
       <div className="grid grid-cols-1 lg:grid-cols-[2.5fr_1fr] gap-6 items-start">
         {/* Left Column: Map & Charts */}
         <div className="flex flex-col gap-6">
-          <main className="panel p-0 flex justify-center items-center overflow-hidden min-h-[500px]">
+          <main className="panel p-0 relative overflow-hidden min-h-[600px] w-full">
             {warehouse ? (
-              <WarehouseGrid warehouse={warehouse} robotNames={robotNames} />
+              <div className="absolute inset-0 w-full h-full">
+                <WarehouseGrid warehouse={warehouse} robotNames={robotNames} isDarkMode={isDarkMode} />
+              </div>
             ) : (
-              <div className="text-center text-zinc-500 py-20 flex flex-col items-center gap-4">
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-zinc-500 gap-4">
                 <Server size={48} className="animate-pulse opacity-50" />
                 <p className="font-medium">Waiting for telemetry stream...</p>
               </div>
